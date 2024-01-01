@@ -1,49 +1,50 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// Home.tsx
 import { useState } from "react";
-import { MdNavigateBefore } from "react-icons/md";
+import { MdNavigateBefore, MdLogout } from "react-icons/md";
+import Menus from "./Menus";
+import { FaShopify } from "react-icons/fa";
+import { FaCircleUser } from "react-icons/fa6";
 
 const Home = () => {
   const [open, setOpen] = useState<boolean>(true);
-  const Menus = [
-    { title: "Dashboard", src: "Chart_fill" },
-    { title: "Inbox", src: "Chat" },
-    { title: "Account", src: "User", gap: "true" },
-  ];
+
   return (
-    <div className=" flex ">
+    <div className="flex">
+      {/* Added flex-col for column layout on small screens "flex  " */}
+      {/* ================= Sidebar ================= md:w-2*/}
       <div
         className={`${
-          open ? " w-72  " : " w-20 "
-        } w-72 h-screen bg-dark-purple relative  duration-300 p-5 pt-8 `}
+          open ? "w-72" : "w-20"
+        } min-h-screen bg-dark-purple relative duration-300 p-5 flex flex-col justify-between`}
       >
-        <MdNavigateBefore
-          onClick={() => setOpen(!open)}
-          size={20}
-          className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 border-2 text-dark-purple bg-white border-dark-purple rounded-full ${
-            !open && " rotate-180 "
-          }`}
-        />
         <div>
-          <h1
-            className={`text-white cursor-pointer duration-500 font-semibold text-xl ${
-              !open && " scale-0 "
-            } `}
-          >
-            Inventory
-          </h1>
-        </div>
-        <ul className=" mt-8 ">
-          {Menus.map((item: any, index: number) => (
-            <li
-              key={index}
-              className=" text-white font-semibold cursor-pointer hover:text-red-300 hover:duration-300 py-2 "
+          <MdNavigateBefore
+            onClick={() => setOpen(!open)}
+            size={20}
+            className={`absolute cursor-pointer -right-3 top-9 w-7 h-7 border-2 text-dark-purple bg-white border-dark-purple rounded-full ${
+              !open && "rotate-180"
+            }`}
+          />
+          <div className="top-0 flex gap-2 items-center text-white p-2 hover:bg-light-white rounded-md">
+            <FaShopify size={20} />
+            <h1
+              className={`text-white cursor-pointer duration-300 font-semibold text-xl p-2 ${
+                !open && "scale-0 hidden"
+              }`}
             >
-              {item?.title}
-            </li>
-          ))}
-        </ul>
+              Inventory
+            </h1>
+          </div>
+          <Menus open={open} />
+        </div>
+        <div className="bg-light-white cursor-pointer font-semibold px-4 py-2 rounded-md flex items-center gap-2 text-white mt-10">
+          <FaCircleUser size={30} className={`${!open && "hidden"}`} />
+          <p className={`${!open && "hidden"}`}>User </p>
+          <MdLogout size={30} />
+        </div>
       </div>
-      <div className=" p-7 text-2xl font-semibold flex-1 h-screen   ">
+      {/* ================= main body =================*/}
+      <div className="p-7 text-2xl font-semibold flex-1 h-screen">
         <h1>Home Page</h1>
       </div>
     </div>
