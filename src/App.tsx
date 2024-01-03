@@ -1,14 +1,11 @@
-// import Navbar from "./components/Navbar";
-
-import Home from "./components/Home";
+import HomeLayout from "./components/HomeLayout";
 
 function App() {
   return (
-    <>
-      <div>
-        <Home />
-      </div>
-    </>
+    <div className="p-7 text-2xl font-semibold flex-1 h-screen w-full ">
+      <HomeLayout />
+      {/* <LoginModal isOpen={isModalOpen} onClose={closeModal} /> */}
+    </div>
   );
 }
 

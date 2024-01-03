@@ -21,12 +21,11 @@ export type IGenericErrorMessage = {
   message: string;
 };
 
-export interface IDepartment {
-  id: string;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+export interface IUserInfo {
+  userId: string;
+  email: string;
+  name: string;
+  role: string;
 }
 
 export interface IAdmin {

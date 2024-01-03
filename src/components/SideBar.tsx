@@ -5,26 +5,18 @@ import { MdNavigateBefore, MdLogout, MdLogin } from "react-icons/md";
 import Menus from "./Menus";
 import { FaShopify } from "react-icons/fa";
 import { FaCircleUser } from "react-icons/fa6";
-import HomeLayout from "./HomeLayout";
-import LoginModal from "./LoginModal";
+
 import { getUserInfo, isLoggedIn, logout } from "../utills/authService";
 import { authKey } from "../constant/storageKey";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
-const Home = () => {
+const SideBar = () => {
   const loggedIn = isLoggedIn();
   const info: any = getUserInfo();
 
   const [open, setOpen] = useState<boolean>(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
   const handleLogout = () => {
     logout(authKey);
     toast.success("User log out successfully");
@@ -71,25 +63,18 @@ const Home = () => {
             <MdLogout size={30} />
           </div>
         ) : (
-          <div
-            onClick={openModal}
-            className="bg-light-white cursor-pointer font-semibold px-4 py-2 rounded-md flex items-center gap-2 text-white mt-10"
-          >
-            <FaCircleUser size={30} className={`${!open && "hidden"}`} />
-            <p className={`${!open && "hidden"}`}>Login</p>
+          <Link to="/login">
+            <div className="bg-light-white cursor-pointer font-semibold px-4 py-2 rounded-md flex items-center gap-2 text-white mt-10">
+              <FaCircleUser size={30} className={`${!open && "hidden"}`} />
+              <p className={`${!open && "hidden"}`}>Login</p>
 
-            <MdLogin size={30} />
-          </div>
+              <MdLogin size={30} />
+            </div>
+          </Link>
         )}
-      </div>
-
-      {/* ================= main body =================*/}
-      <div className="p-7 text-2xl font-semibold flex-1 h-screen w-full ">
-        <HomeLayout />
-        <LoginModal isOpen={isModalOpen} onClose={closeModal} />
       </div>
     </div>
   );
 };
 
-export default Home;
+export default SideBar;

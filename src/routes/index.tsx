@@ -1,19 +1,32 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Home from "../components/Home";
-import Login from "../components/Login";
+// import Home from "../components/Home";
+
 import Register from "../components/Register";
 import NotFound from "../components/NotFound";
+import Dashboard from "../components/Dashboard";
+import Profile from "../components/Profile";
+import Login from "../components/Login";
+import EditProfile from "../components/EditProfile";
+// import Login from "../components/Login";
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Dashboard />,
     children: [
       {
         path: "/",
         element: <App />,
       },
 
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/editProfile/:id",
+        element: <EditProfile />,
+      },
       {
         path: "/login",
         element: <Login />,

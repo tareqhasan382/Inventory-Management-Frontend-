@@ -1,10 +1,12 @@
 // Menus.tsx MdAnalytics
 import React from "react";
-import { MdDashboard, MdAnalytics, MdHelp } from "react-icons/md";
+import { MdAnalytics, MdHelp } from "react-icons/md";
 import { RiAccountCircleFill, RiMoneyDollarBoxFill } from "react-icons/ri";
 import { BsBoxFill } from "react-icons/bs";
 import { IoSettingsSharp } from "react-icons/io5";
-import { FaShopify } from "react-icons/fa";
+import { FaShopify, FaHome } from "react-icons/fa";
+import { ImProfile } from "react-icons/im";
+import { Link } from "react-router-dom";
 interface MenusProps {
   open: boolean;
 }
@@ -14,12 +16,22 @@ const Menus: React.FC<MenusProps> = ({ open }) => {
     <div className="mt-5">
       <ul className="gap-2">
         {/* ... other menu items hover:bg-light-white */}
-        <li className="flex gap-2 hover:bg-light-white items-center text-white font-semibold cursor-pointer hover:text-red-300 hover:duration-300 p-2 rounded-md ">
-          <MdDashboard size={20} />
-          <span className={`${!open && "hidden"} origin-left duration-200`}>
-            Dashboard
-          </span>
-        </li>
+        <Link to="/">
+          <li className="flex gap-2 hover:bg-light-white items-center text-white font-semibold cursor-pointer hover:text-red-300 hover:duration-300 p-2 rounded-md ">
+            <FaHome size={20} />
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              Dashboard
+            </span>
+          </li>
+        </Link>
+        <Link to="/profile">
+          <li className="flex gap-2 hover:bg-light-white items-center text-white font-semibold cursor-pointer hover:text-red-300 hover:duration-300 p-2 rounded-md ">
+            <ImProfile size={20} />
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              Profile
+            </span>
+          </li>
+        </Link>
         <li className="gap-2 hover:bg-light-white rounded-md duration-200 flex items-center text-white  font-semibold cursor-pointer hover:text-red-300 hover:duration-300 p-2">
           <FaShopify size={20} />
           <span className={`${!open && "hidden"} origin-left duration-200`}>
