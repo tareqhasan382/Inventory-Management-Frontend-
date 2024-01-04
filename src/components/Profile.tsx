@@ -1,15 +1,27 @@
 import { Link } from "react-router-dom";
 import { useProfileQuery } from "../redux/api/profileApi";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProviders";
 
 const Profile = () => {
+  const authContext = useContext(AuthContext);
+
   const { data, isLoading, isSuccess, isError } = useProfileQuery(null);
   console.log("data:", data);
   console.log("isLoading:", isLoading);
   console.log("isSuccess:", isSuccess);
   console.log("error:", isError);
+  if (!authContext) {
+    // Handle the case where AuthContext is null
+    return <div>Loading...</div>;
+  }
+
+  const { user } = authContext;
   return (
     <div className="p-7 text-2xl font-semibold flex-1 h-screen w-full ">
       <h1 className=" text-center ">Profile</h1>
+      <h1>{user} </h1>
+
       {data ? (
         <div className=" flex flex-col items-center ">
           <img

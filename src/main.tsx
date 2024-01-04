@@ -7,11 +7,14 @@ import { RouterProvider } from "react-router-dom";
 import routes from "./routes/index.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthProviders from "./context/AuthProviders.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ToastContainer />
-      <RouterProvider router={routes} />
-    </Provider>
+    <AuthProviders>
+      <Provider store={store}>
+        <ToastContainer />
+        <RouterProvider router={routes} />
+      </Provider>
+    </AuthProviders>
   </React.StrictMode>
 );

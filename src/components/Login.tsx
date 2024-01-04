@@ -4,6 +4,8 @@ import { authKey } from "../constant/storageKey";
 import { toast } from "react-toastify";
 import { setToLocalStorage } from "../utills/local-storage";
 import { Link } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleAuthProvider } from "../firebase/firebase.config";
 
 interface InputsForm {
   email: string;
@@ -22,6 +24,28 @@ const LoginModal: React.FC = () => {
       // console.log("isSuccess:", isSuccess);
       setToLocalStorage(authKey, result?.data.accessToken);
       toast.success("Logged in Successfully.");
+    }
+  };
+  const handleSignInGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleAuthProvider);
+      if (result.user) {
+        toast.success("User Log in Successfully");
+        const data = {
+          name: result?.user?.displayName,
+          email: result.user?.email,
+          image: result.user?.photoURL,
+        };
+        // await login(data);
+        console.log("test:", data);
+      }
+      console.log("result:", result);
+      // console.log("token:", result.user?.accessToken);
+      console.log("email:", result.user.email);
+      console.log("displayName:", result.user.displayName);
+      console.log("photoURL:", result.user.photoURL);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -76,7 +100,10 @@ const LoginModal: React.FC = () => {
         </form>
         <div>------------------</div>
         <div className="lg:w-[500px] w-full px-2 py-2 ">
-          <button className=" w-full "> Google </button>
+          <button onClick={handleSignInGoogle} className=" w-full ">
+            {" "}
+            Google{" "}
+          </button>
         </div>
       </div>
     </div>
