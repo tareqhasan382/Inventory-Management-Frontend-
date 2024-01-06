@@ -32,12 +32,22 @@ const Menus: React.FC<MenusProps> = ({ open }) => {
             </span>
           </li>
         </Link>
-        <li className="gap-2 hover:bg-light-white rounded-md duration-200 flex items-center text-white  font-semibold cursor-pointer hover:text-red-300 hover:duration-300 p-2">
-          <FaShopify size={20} />
-          <span className={`${!open && "hidden"} origin-left duration-200`}>
-            Products
-          </span>
-        </li>
+        <Link to="/products">
+          <li className="gap-2 hover:bg-light-white rounded-md duration-200 flex items-center text-white  font-semibold cursor-pointer hover:text-red-300 hover:duration-300 p-2">
+            <FaShopify size={20} />
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              Products
+            </span>
+          </li>
+        </Link>
+        <Link to="/addProduct">
+          <li className="flex gap-2 hover:bg-light-white items-center text-white font-semibold cursor-pointer hover:text-red-300 hover:duration-300 p-2 rounded-md ">
+            <ImProfile size={20} />
+            <span className={`${!open && "hidden"} origin-left duration-200`}>
+              Add Product
+            </span>
+          </li>
+        </Link>
         {/* ... other menu items */}
         <li className=" gap-2 hover:bg-light-white rounded-md duration-200 flex items-center text-white font-semibold cursor-pointer hover:text-red-300 hover:duration-300 p-2 ">
           <RiAccountCircleFill size={20} />

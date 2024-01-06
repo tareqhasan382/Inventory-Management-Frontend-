@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 //profile
 
+import { Inputs } from "../../components/EditProfile";
 import { baseApi } from "./baseApi";
 // /auth/login
 export const profileApi = baseApi.injectEndpoints({
@@ -11,15 +13,24 @@ export const profileApi = baseApi.injectEndpoints({
       }),
       providesTags: ["auth"],
     }),
-    login: build.mutation({
-      query: (loginData) => ({
-        url: "/api/v1/auth/login",
-        method: "POST",
-        data: loginData,
+    //================================
+    updateProfile: build.mutation<void, Pick<Inputs, any> & Partial<Inputs>>({
+      query: ({ id, ...userData }) => ({
+        url: `/api/v1/editProfile/${id}`,
+        method: "PUT",
+        body: userData,
       }),
-      invalidatesTags: ["auth"],
     }),
+    //====================
+    updatePost: build.mutation<void, Pick<Inputs, "id"> & Partial<Inputs>>({
+      query: ({ id, ...patch }) => ({
+        url: `posts/${id}`,
+        method: "PUT",
+        body: patch,
+      }),
+    }),
+    //====================
   }),
 });
 
-export const { useProfileQuery, useLoginMutation } = profileApi;
+export const { useProfileQuery, useUpdateProfileMutation } = profileApi;
